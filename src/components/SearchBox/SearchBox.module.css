@@ -1,0 +1,12 @@
+.wrapper {
+	margin: 10px;
+}
+
+.text {
+	margin-bottom: 5px;
+}
+
+.input {
+	min-width: 200px;
+	padding: 5px;
+}

@@ -1,0 +1,27 @@
+.item {
+	display: flex;
+	gap: 40px;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 10px;
+	min-width: 250px;
+}
+
+.mainPart {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.line {
+	display: flex;
+	gap: 5px;
+}
+
+.btn {
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 4px;
+}
