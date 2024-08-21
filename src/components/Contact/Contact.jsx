@@ -1,8 +1,12 @@
 import clsx from 'clsx';
 import s from './Contact.module.css';
 import { FaUser, FaPhone } from 'react-icons/fa6';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
 
-const Contact = ({ item, handleDeleteContact }) => {
+const Contact = ({ item }) => {
+	const dispatch = useDispatch();
+
 	return (
 		<div className={clsx(s.item)}>
 			<div className={clsx(s.mainPart)}>
@@ -22,7 +26,7 @@ const Contact = ({ item, handleDeleteContact }) => {
 			<div className={clsx(s.bts)}>
 				<button
 					className={clsx(s.btn)}
-					onClick={() => handleDeleteContact(item.id)}>
+					onClick={() => dispatch(deleteContact(item.id))}>
 					Delete
 				</button>
 			</div>

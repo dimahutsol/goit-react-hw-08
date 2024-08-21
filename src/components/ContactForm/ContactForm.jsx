@@ -2,15 +2,20 @@ import clsx from 'clsx';
 import s from './ContactForm.module.css';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
+import { nanoid } from '@reduxjs/toolkit';
 
-const ContactForm = ({ handleAddContact }) => {
+const ContactForm = () => {
+	const dispatch = useDispatch();
+
 	const initialValues = {
 		name: '',
 		number: '',
 	};
 
 	const handleSubmit = (values, options) => {
-		handleAddContact(values);
+		dispatch(addContact({ ...values, id: nanoid() }));
 		options.resetForm();
 	};
 
@@ -47,7 +52,9 @@ const ContactForm = ({ handleAddContact }) => {
 							component='p'
 						/>
 					</label>
-					<button className={clsx(s.btn)}>Add contact</button>
+					<button type='submit' className={clsx(s.btn)}>
+						Add contact
+					</button>
 				</Form>
 			</Formik>
 		</div>
