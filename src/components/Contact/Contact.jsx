@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import s from './Contact.module.css';
 import { FaUser, FaPhone } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsOps';
+import { deleteContact } from '../../redux/contacts/operations';
 
 const Contact = ({ item }) => {
 	const dispatch = useDispatch();
