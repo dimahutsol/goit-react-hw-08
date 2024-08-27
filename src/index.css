@@ -6,7 +6,12 @@
 
 body {
 	margin: 0;
-	font-family: sans-serif;
+	font-family: 'Moderustic', sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	background-image: url('./images/oldPaper.webp');
+	background-size: cover;
+	background-position: center;
 }
 
 h1,

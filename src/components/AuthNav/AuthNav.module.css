@@ -1,0 +1,17 @@
+.list {
+	display: flex;
+	gap: 20px;
+}
+
+.link {
+	padding: 10px 0;
+}
+
+.listItem {
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.listItemActive {
+	font-weight: 600;
+}

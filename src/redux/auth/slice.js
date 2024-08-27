@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { login, logout, refreshUser, register } from './operations';
+import { notifySuccess } from '../../helpers/toasts';
 
 const initialState = {
 	user: {
@@ -9,6 +10,8 @@ const initialState = {
 	token: null,
 	isLoggedIn: false,
 	isRefreshing: false,
+	isLoading: false,
+	isError: false,
 };
 
 const slice = createSlice({
@@ -20,11 +23,13 @@ const slice = createSlice({
 				state.user = action.payload.user;
 				state.token = action.payload.token;
 				state.isLoggedIn = true;
+				notifySuccess();
 			})
 			.addCase(login.fulfilled, (state, action) => {
 				state.user = action.payload.user;
 				state.token = action.payload.token;
 				state.isLoggedIn = true;
+				notifySuccess();
 			})
 			.addCase(logout.fulfilled, () => {
 				return initialState;
@@ -39,7 +44,44 @@ const slice = createSlice({
 			})
 			.addCase(refreshUser.rejected, state => {
 				state.isRefreshing = false;
-			});
+			})
+			.addMatcher(
+				isAnyOf(
+					register.fulfilled,
+					register.rejected,
+					login.fulfilled,
+					login.rejected,
+					logout.fulfilled,
+					logout.rejected,
+					refreshUser.fulfilled,
+					refreshUser.rejected
+				),
+				state => {
+					state.isLoading = false;
+				}
+			)
+			.addMatcher(
+				isAnyOf(
+					register.rejected,
+					login.rejected,
+					logout.rejected,
+					refreshUser.rejected
+				),
+				state => {
+					state.isError = true;
+				}
+			)
+			.addMatcher(
+				isAnyOf(
+					register.pending,
+					login.pending,
+					logout.pending,
+					refreshUser.pending
+				),
+				state => {
+					state.isLoading = true;
+				}
+			);
 	},
 });
 

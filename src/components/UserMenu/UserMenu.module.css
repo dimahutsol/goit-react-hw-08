@@ -1,0 +1,30 @@
+.wrapper {
+	display: flex;
+	gap: 20px;
+}
+
+.text {
+	font-family: Pacifico, sans-serif;
+	font-size: 18px;
+}
+
+.name {
+	font-size: 22px;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.button {
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 10px;
+	border-radius: 5px;
+	box-shadow: var(--shadow);
+	transition: all 0.2s ease-in-out;
+	&:hover,
+	&:focus {
+		box-shadow: none;
+	}
+}

@@ -1,20 +1,46 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import Contact from '../Contact/Contact';
+import { selectContactsFilteredMemo } from '../../redux/contacts/selectors';
+import Switch from '@mui/material/Switch';
 import clsx from 'clsx';
 import s from './ContactList.module.css';
-import Contact from '../Contact/Contact';
-import { useSelector } from 'react-redux';
-import { selectContactsFilteredMemo } from '../../redux/contacts/selectors';
+
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 const ContactList = () => {
+	const [isSorted, setIsSorted] = useState(false);
+
 	const filteredContacts = useSelector(selectContactsFilteredMemo);
+	const filteredSortedContacts = filteredContacts.toSorted((a, b) => {
+		if (a.name < b.name) return -1;
+		if (a.name > b.name) return 1;
+		return 0;
+	});
+
+	const contactsToRender = isSorted ? filteredSortedContacts : filteredContacts;
 
 	return (
-		<ul className={clsx(s.list)}>
-			{filteredContacts.map(item => (
-				<li key={item.id}>
-					<Contact item={item} />
-				</li>
-			))}
-		</ul>
+		<>
+			<form>
+				<label className={clsx(s.label)}>
+					Sort by name
+					<Switch
+						className={clsx(s.switch)}
+						{...label}
+						checked={isSorted}
+						onChange={() => setIsSorted(prev => !prev)}
+					/>
+				</label>
+			</form>
+			<ul className={clsx(s.list)}>
+				{contactsToRender.map(item => (
+					<li key={item.id}>
+						<Contact item={item} />
+					</li>
+				))}
+			</ul>
+		</>
 	);
 };
 

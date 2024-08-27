@@ -17,11 +17,36 @@
 
 .line {
 	display: flex;
+	align-items: center;
 	gap: 5px;
 }
 
+.icon {
+	display: flex;
+	align-items: center;
+}
+
+.text {
+	font-family: Pacifico, sans-serif;
+	font-size: 18px;
+}
+
+.bts {
+	display: flex;
+	gap: 10px;
+}
+
 .btn {
-	padding: 5px;
-	border: 1px solid black;
-	border-radius: 4px;
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 10px;
+	border-radius: 5px;
+	box-shadow: var(--shadow);
+	transition: all 0.2s ease-in-out;
+	&:hover,
+	&:focus {
+		box-shadow: none;
+	}
 }

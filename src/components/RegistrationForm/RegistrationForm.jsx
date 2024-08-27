@@ -1,7 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import * as Yup from 'yup';
 import { register } from '../../redux/auth/operations';
+import { registrationSchema } from '../../helpers/validationSchemas';
+import clsx from 'clsx';
+import s from './RegistrationForm.module.css';
 
 const RegistrationForm = () => {
 	const dispatch = useDispatch();
@@ -17,43 +19,43 @@ const RegistrationForm = () => {
 		options.resetForm();
 	};
 
-	const registrationSchema = Yup.object().shape({
-		name: Yup.string()
-			.trim()
-			.min(3, 'Too short!')
-			.max(20, 'Too long!')
-			.required('The field is required!'),
-		email: Yup.string().trim().email().required('The field is required!'),
-		password: Yup.string()
-			.trim()
-			.min(3, 'Too short!')
-			.max(20, 'Too long!')
-			.required('The field is required!'),
-	});
-
 	return (
-		<div>
+		<div className={clsx(s.wrapper)}>
 			<Formik
 				initialValues={initialValues}
 				onSubmit={handleSubmit}
 				validationSchema={registrationSchema}>
-				<Form>
-					<label>
-						Name
-						<Field name='name' type='text' placeholder='name' />
-						<ErrorMessage name='name' component='span' />
+				<Form className={clsx(s.form)}>
+					<label className={clsx(s.label)}>
+						Name:
+						<Field className={clsx(s.field)} name='name' type='text' />
+						<ErrorMessage
+							className={clsx(s.message)}
+							name='name'
+							component='span'
+						/>
 					</label>
-					<label>
-						Email
-						<Field name='email' type='email' placeholder='email' />
-						<ErrorMessage name='email' component='span' />
+					<label className={clsx(s.label)}>
+						Email:
+						<Field className={clsx(s.field)} name='email' type='email' />
+						<ErrorMessage
+							className={clsx(s.message)}
+							name='email'
+							component='span'
+						/>
 					</label>
-					<label>
-						Password
-						<Field name='password' type='password' placeholder='password' />
-						<ErrorMessage name='password' component='span' />
+					<label className={clsx(s.label)}>
+						Password:
+						<Field className={clsx(s.field)} name='password' type='password' />
+						<ErrorMessage
+							className={clsx(s.message)}
+							name='password'
+							component='span'
+						/>
 					</label>
-					<button type='submit'>Sign Up</button>
+					<button className={clsx(s.button)} type='submit'>
+						Sign Up
+					</button>
 				</Form>
 			</Formik>
 		</div>

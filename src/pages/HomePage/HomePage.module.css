@@ -1,0 +1,45 @@
+.wrapper {
+	background-image: url('../../images/book_bg.jpg');
+	height: 100vh;
+	background-size: cover;
+	padding: 0 15px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.middleBox {
+	display: flex;
+	flex-direction: column;
+	padding: 40px;
+	background-color: rgba(255, 255, 255, 0.6);
+	border-radius: 15px;
+}
+
+.title {
+	font-family: Pacifico, sans-serif;
+	margin-bottom: 20px;
+}
+
+.accent {
+	font-size: 64px;
+	text-decoration: underline;
+	margin-left: 20px;
+}
+
+.subtitle {
+	font-family: Pacifico, sans-serif;
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+.list {
+	list-style: disc;
+	padding-left: 20px;
+}
+
+.listItemText {
+	font-family: Pacifico, sans-serif;
+	font-size: 18px;
+}

@@ -36,3 +36,18 @@ export const deleteContact = createAsyncThunk(
 		}
 	}
 );
+
+export const updateContact = createAsyncThunk(
+	'contacts/updateContact ',
+	async (contact, thunkApi) => {
+		try {
+			const { data } = await goItApi.patch(`contacts/${contact.id}`, {
+				name: contact.name,
+				number: contact.number,
+			});
+			return data;
+		} catch (error) {
+			return thunkApi.rejectWithValue(error.message);
+		}
+	}
+);

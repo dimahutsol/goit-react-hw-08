@@ -23,6 +23,14 @@ export const register = createAsyncThunk(
 		} catch (error) {
 			return thunkApi.rejectWithValue(error.message);
 		}
+	},
+	{
+		condition: (_, thunkApi) => {
+			const isLoading = thunkApi.getState().auth.isLoading;
+			if (isLoading) {
+				return false;
+			}
+		},
 	}
 );
 
@@ -36,17 +44,36 @@ export const login = createAsyncThunk(
 		} catch (error) {
 			return thunkApi.rejectWithValue(error.message);
 		}
+	},
+	{
+		condition: (_, thunkApi) => {
+			const isLoading = thunkApi.getState().auth.isLoading;
+			if (isLoading) {
+				return false;
+			}
+		},
 	}
 );
 
-export const logout = createAsyncThunk('auth/logout', async (_, thunkApi) => {
-	try {
-		await goItApi.post('users/logout');
-		clearAuthHeader();
-	} catch (error) {
-		return thunkApi.rejectWithValue(error.message);
+export const logout = createAsyncThunk(
+	'auth/logout',
+	async (_, thunkApi) => {
+		try {
+			await goItApi.post('users/logout');
+			clearAuthHeader();
+		} catch (error) {
+			return thunkApi.rejectWithValue(error.message);
+		}
+	},
+	{
+		condition: (_, thunkApi) => {
+			const isLoading = thunkApi.getState().auth.isLoading;
+			if (isLoading) {
+				return false;
+			}
+		},
 	}
-});
+);
 
 export const refreshUser = createAsyncThunk(
 	'auth/refresh',

@@ -1,7 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import * as Yup from 'yup';
 import { login } from '../../redux/auth/operations';
+import { loginSchema } from '../../helpers/validationSchemas';
+import clsx from 'clsx';
+import s from './LoginForm.module.css';
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
@@ -16,33 +18,34 @@ const LoginForm = () => {
 		options.resetForm();
 	};
 
-	const loginSchema = Yup.object().shape({
-		email: Yup.string().trim().email().required('The field is required!'),
-		password: Yup.string()
-			.trim()
-			.min(3, 'Too short!')
-			.max(20, 'Too long!')
-			.required('The field is required!'),
-	});
-
 	return (
-		<div>
+		<div className={clsx(s.wrapper)}>
 			<Formik
 				initialValues={initialValues}
 				onSubmit={handleSubmit}
 				validationSchema={loginSchema}>
-				<Form>
-					<label>
+				<Form className={clsx(s.form)}>
+					<label className={clsx(s.label)}>
 						Email
-						<Field name='email' type='email' placeholder='email' />
-						<ErrorMessage name='email' component='span' />
+						<Field className={clsx(s.field)} name='email' type='email' />
+						<ErrorMessage
+							className={clsx(s.message)}
+							name='email'
+							component='span'
+						/>
 					</label>
-					<label>
+					<label className={clsx(s.label)}>
 						Password
-						<Field name='password' type='password' placeholder='password' />
-						<ErrorMessage name='password' component='span' />
+						<Field className={clsx(s.field)} name='password' type='password' />
+						<ErrorMessage
+							className={clsx(s.message)}
+							name='password'
+							component='span'
+						/>
 					</label>
-					<button type='submit'>Log in</button>
+					<button className={clsx(s.button)} type='submit'>
+						Log in
+					</button>
 				</Form>
 			</Formik>
 		</div>
