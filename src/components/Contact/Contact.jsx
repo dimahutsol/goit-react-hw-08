@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaUser, FaPhone } from 'react-icons/fa6';
 import { deleteContact } from '../../redux/contacts/operations';
@@ -21,6 +21,7 @@ const Contact = ({ item }) => {
 	};
 
 	const closeEditingModal = () => {
+		setIsEditingModalOpen(false);
 		dispatch(setContactToEdit(null));
 	};
 
@@ -41,14 +42,6 @@ const Contact = ({ item }) => {
 		dispatch(deleteContact(item.id));
 		closeDeleteModal();
 	};
-
-	useEffect(() => {
-		if (contactToEdit === null) {
-			return setIsEditingModalOpen(false);
-		}
-
-		openEditingModal();
-	}, [contactToEdit]);
 
 	return (
 		<>
@@ -78,18 +71,30 @@ const Contact = ({ item }) => {
 			</div>
 
 			<CustomModal isOpen={isEditingModalOpen} closeModal={closeEditingModal}>
-				<EditContactForm contact={contactToEdit ?? { name: '', number: '' }} />
+				<EditContactForm
+					closeModal={closeEditingModal}
+					onUpdate={() => setIsEditingModalOpen(false)}
+					contact={contactToEdit ?? { name: '', number: '' }}
+				/>
 			</CustomModal>
 
 			<CustomModal isOpen={isDeleteModalOpen} closeModal={closeDeleteModal}>
-				<div>
-					<p>Please, confirm deleting</p>
-					<button type='button' onClick={handleDeleteConfirmClick}>
-						Confirm
-					</button>
-					<button type='button' onClick={() => closeDeleteModal()}>
-						Cancel
-					</button>
+				<div className={clsx(s.form)}>
+					<p className={clsx(s.modalMessage)}>Please, confirm deleting</p>
+					<div className={clsx(s.modalBts)}>
+						<button
+							className={clsx(s.btn)}
+							type='button'
+							onClick={handleDeleteConfirmClick}>
+							Confirm
+						</button>
+						<button
+							className={clsx(s.btn)}
+							type='button'
+							onClick={() => closeDeleteModal()}>
+							Cancel
+						</button>
+					</div>
 				</div>
 			</CustomModal>
 		</>

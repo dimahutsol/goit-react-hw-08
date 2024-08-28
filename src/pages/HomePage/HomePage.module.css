@@ -1,12 +1,13 @@
 .wrapper {
 	background-image: url('../../images/book_bg.jpg');
-	height: 100vh;
+	width: 100vw;
 	background-size: cover;
 	padding: 0 15px;
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-grow: 1;
 }
 
 .middleBox {

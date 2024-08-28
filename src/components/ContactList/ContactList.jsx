@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import Switch from '@mui/material/Switch';
 import Contact from '../Contact/Contact';
 import { selectContactsFilteredMemo } from '../../redux/contacts/selectors';
-import Switch from '@mui/material/Switch';
 import clsx from 'clsx';
 import s from './ContactList.module.css';
 
@@ -29,6 +29,7 @@ const ContactList = () => {
 						className={clsx(s.switch)}
 						{...label}
 						checked={isSorted}
+						color='warning'
 						onChange={() => setIsSorted(prev => !prev)}
 					/>
 				</label>

@@ -1,24 +1,63 @@
 .form {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
 	border: 1px solid black;
-	border-radius: 4px;
-	max-width: 300px;
-	padding: 10px;
-	margin: 10px;
+	border-radius: 10px;
+	padding: 50px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	border: 1px solid black;
+	border-radius: 10px;
+	padding: 50px;
 }
 
 .label {
 	display: flex;
-	flex-direction: column;
-	gap: 2px;
-	margin-bottom: 10px;
+	justify-content: space-between;
+	gap: 10px;
+	font-family: Pacifico, sans-serif;
+	position: relative;
 }
 
-.error {
+.field {
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid black;
+	outline: none;
+}
+
+.message {
+	position: absolute;
+	left: 0;
+	top: calc(100% + 5px);
+	font-size: 12px;
+	width: 100%;
 	color: red;
 }
 
-.btn {
-	display: block;
-	margin: 0 auto;
-	padding: 5px;
+.button {
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 10px;
+	border-radius: 5px;
+	box-shadow: var(--shadow);
+	transition: all 0.2s ease-in-out;
+	&:hover,
+	&:focus {
+		box-shadow: none;
+	}
+}
+
+.modalBts {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	margin-top: 20px;
 }
